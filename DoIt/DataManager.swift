@@ -81,8 +81,7 @@ class DataManager {
     
     func toggleCheckItem(index: Int){
         let item = items[index]
-        cachedItems = cachedItems.map({ if $0.name == item.name { $0.checked = !$0.checked }; return $0 })
-        items[index].checked = !items[index].checked
+        item.checked = !item.checked
         saveData()
     }
 }
