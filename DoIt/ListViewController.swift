@@ -11,8 +11,9 @@ import UIKit
 class ListViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
     
-    var items = ["Pain", "Lait", "Jambon", "Fromage"]
+    var saveItems = [Item]()
     
     var items2 = [Item]()
     
@@ -28,15 +29,9 @@ class ListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //createItems()
     }
     
-    func createItems(){
-        for item in items {
-            items2.append(Item(name: item))
-        }
-    }
-    
+    //MARK: File
     func saveData(){
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
@@ -53,6 +48,7 @@ class ListViewController: UIViewController {
         do{
             let data = try String(contentsOf: dataFileUrl, encoding: String.Encoding.utf8).data(using: String.Encoding.utf8)
             items2 = try decoder.decode([Item].self, from: data!)
+            saveItems = items2
         }catch {
             
         }
@@ -65,9 +61,13 @@ class ListViewController: UIViewController {
         let okAction = UIAlertAction(title: "OK", style: .default, handler: { (action) in
             let text = alertController.textFields?.first?.text
             let item = Item(name: text!)
-            self.items2.append(item)
-            self.tableView.reloadData()
+            
+            self.saveItems.append(item)
+            self.items2 = self.saveItems
+            
             self.saveData()
+            self.searchBar.text = ""
+            self.tableView.reloadData()
         })
         alertController.addTextField{(textField) in
             textField.placeholder = "Name"
@@ -117,3 +117,14 @@ extension ListViewController:  UITableViewDataSource, UITableViewDelegate {
     }
 }
 
+extension ListViewController: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if (searchText.isEmpty){
+            items2 = saveItems
+        } else {
+            items2 = saveItems.filter{ $0.name.lowercased().range(of: searchText.lowercased()) != nil }
+        }
+        tableView.reloadData()
+    }
+}
