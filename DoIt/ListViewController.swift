@@ -13,45 +13,10 @@ class ListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
-    var saveItems = [Item]()
-    
-    var items2 = [Item]()
-    
-    var documentDirectory: URL = FileManager.default.urls(for: FileManager.SearchPathDirectory.documentDirectory, in: FileManager.SearchPathDomainMask.userDomainMask).first!
-    var dataFileUrl: URL = URL(fileURLWithPath: "")
-    let fileName="data.json"
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        dataFileUrl=documentDirectory.appendingPathComponent(fileName)
-        loadData()
-    }
+    let dataManager: DataManager = DataManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-    
-    //MARK: File
-    func saveData(){
-        let encoder = JSONEncoder()
-        encoder.outputFormatting = .prettyPrinted
-        do{
-            let data = try encoder.encode(items2)
-            try data.write(to: dataFileUrl)
-        } catch{
-            
-        }
-    }
-    
-    func loadData(){
-        let decoder=JSONDecoder()
-        do{
-            let data = try String(contentsOf: dataFileUrl, encoding: String.Encoding.utf8).data(using: String.Encoding.utf8)
-            items2 = try decoder.decode([Item].self, from: data!)
-            saveItems = items2
-        }catch {
-            
-        }
     }
     
     //MARK: Actions
@@ -60,13 +25,10 @@ class ListViewController: UIViewController {
         
         let okAction = UIAlertAction(title: "OK", style: .default, handler: { (action) in
             let text = alertController.textFields?.first?.text
-            let item = Item(name: text!)
             
-            self.saveItems.append(item)
-            self.items2 = self.saveItems
+            self.dataManager.addItem(text: text!)
+            self.dataManager.filterItems(filter: self.searchBar.text!)
             
-            self.saveData()
-            self.searchBar.text = ""
             self.tableView.reloadData()
         })
         alertController.addTextField{(textField) in
@@ -75,6 +37,7 @@ class ListViewController: UIViewController {
         alertController.addAction(okAction)
         present(alertController, animated: true, completion: nil)
     }
+    
     @IBAction func editAction(_ sender: Any) {
         tableView.isEditing = !tableView.isEditing
     }
@@ -84,47 +47,38 @@ extension ListViewController:  UITableViewDataSource, UITableViewDelegate {
    
     //MARK: UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items2.count
+        return dataManager.getItems().count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ListViewCellIdentifier")
-        let item = items2[indexPath.row]
+        let item = dataManager.getItem(index: indexPath.row)
         cell?.textLabel?.text = item.name
         cell?.accessoryType = item.checked ? .checkmark : .none
         return cell!
     }
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        let sourceItem = items2.remove(at: sourceIndexPath.row)
-        items2.insert(sourceItem, at: destinationIndexPath.row)
-        self.saveData()
+        dataManager.moveItem(sourceIndex: sourceIndexPath.row, destinationIndex: destinationIndexPath.row)
     }
     
     //MARK: UITableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
-        items2[indexPath.row].checked = !items2[indexPath.row].checked
+        dataManager.toggleCheckItem(index: indexPath.row)
         tableView.reloadRows(at: [indexPath], with: .automatic)
-        self.saveData()
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        items2.remove(at: indexPath.row)
+        dataManager.removeItem(index: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: .automatic)
-        self.saveData()
     }
 }
 
 extension ListViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if (searchText.isEmpty){
-            items2 = saveItems
-        } else {
-            items2 = saveItems.filter{ $0.name.lowercased().range(of: searchText.lowercased()) != nil }
-        }
+        dataManager.filterItems(filter: searchText)
         tableView.reloadData()
     }
 }
