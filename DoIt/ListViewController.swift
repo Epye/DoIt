@@ -80,6 +80,17 @@ extension ListViewController:  UITableViewDataSource, UITableViewDelegate {
         dataManager.removeItem(index: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: .automatic)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+            if let identifier = segue.identifier,
+                let navigationController = segue.destination as? UINavigationController,
+                let destination = navigationController.topViewController as? AddItemViewController {
+                
+                if identifier == "AddItem", let cell = sender as? UITableViewCell {
+                    destination.delegate = self
+                }
+            }
+    }
 }
 
 extension ListViewController: UISearchBarDelegate {
@@ -87,5 +98,11 @@ extension ListViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         dataManager.filterItems(filter: searchText)
         tableView.reloadData()
+    }
+}
+
+extension ListViewController : AddItemViewControllerDelegate{
+    func addItem(){
+        
     }
 }
