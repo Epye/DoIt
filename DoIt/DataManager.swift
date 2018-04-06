@@ -10,7 +10,6 @@ import Foundation
 import CoreData
 
 class DataManager {
-    var items = [Tache]()
     var cachedItems = [Tache]()
     
     required init() {
@@ -23,14 +22,13 @@ class DataManager {
     }
     
     func loadData(){
-        let itemFetch = NSFetchRequest<Tache>(entityName: "Tache")
+        let itemFetch: NSFetchRequest<Tache> = Tache.fetchRequest()
         
         do {
             cachedItems = try persistentContainer.viewContext.fetch(itemFetch)
-            items = cachedItems
         }
         catch {
-            
+            debugPrint("Could not load the items from CoreData")
         }
     }
     
@@ -44,23 +42,22 @@ class DataManager {
     }
     
     func getItems() -> [Tache] {
-        return items
+        return cachedItems
     }
     
     func getItem(index: Int) -> Tache {
-        return items[index]
+        return cachedItems[index]
     }
     
     func moveItem(sourceIndex: Int, destinationIndex: Int){
         let sourceItem = cachedItems.remove(at: sourceIndex)
         cachedItems.insert(sourceItem, at: destinationIndex)
-        items = cachedItems
         saveData()
     }
     
     func removeItem(index: Int) {
-        let item = items.remove(at: index)
-        cachedItems = cachedItems.filter{ $0.nom != item.nom }
+        let item = cachedItems[index]
+        cachedItems.remove(at: index)
         let context = persistentContainer.viewContext
         context.delete(item)
         saveData()
@@ -68,14 +65,23 @@ class DataManager {
     
     func filterItems(filter: String) {
         if filter.isEmpty {
-            items = cachedItems
+            loadData()
         } else {
-            items = cachedItems.filter{ $0.nom?.range(of: filter, options: [.caseInsensitive, .diacriticInsensitive]) != nil }
+            let sortDescriptor = NSSortDescriptor(key: "nom", ascending: true)
+            let fetchedTaches: NSFetchRequest<Tache> = Tache.fetchRequest()
+            fetchedTaches.sortDescriptors = [sortDescriptor]
+            fetchedTaches.predicate = NSPredicate(format: "nom contains[cd] %@", filter)
+            do {
+                cachedItems = try persistentContainer.viewContext.fetch(fetchedTaches)
+            }
+            catch {
+                debugPrint("Could not load the items from CoreData")
+            }
         }
     }
     
     func toggleCheckItem(index: Int){
-        let item = items[index]
+        let item = cachedItems[index]
         item.checked = !item.checked
         saveData()
     }
