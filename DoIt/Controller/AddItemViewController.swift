@@ -80,7 +80,7 @@ class AddItemViewController : UITableViewController{
 
 protocol AddItemViewControllerDelegate : class {
     func AddItemViewControllerDidCancel(_ controller: AddItemViewController)
-    func addItem(_ controller: AddItemViewController, didFinishAddingItem string: String)
+    func addItem(_ controller: AddItemViewController, didFinishAddingItem name: String)
     func addItem(_ controller: AddItemViewController, didFinishEditingItem tache: Tache)
 }
 

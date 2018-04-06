@@ -108,7 +108,10 @@ extension ListViewController: UISearchBarDelegate {
 }
 
 extension ListViewController : AddItemViewControllerDelegate{
-    func addItem(_ controller: AddItemViewController, didFinishAddingItem string: String) {
+    func addItem(_ controller: AddItemViewController, didFinishAddingItem name: String) {
+        controller.dismiss(animated: true)
+        dataManager.addItem(text : name)
+        tableView.reloadData()
     }
     
     
