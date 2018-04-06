@@ -172,8 +172,16 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Add Item" id="uQv-jS-vDb">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="qrS-97-Mvw"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="Fcz-62-VjP"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="qrS-97-Mvw">
+                            <connections>
+                                <action selector="cancel" destination="XSa-Fn-ais" id="elu-kr-acf"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="Fcz-62-VjP">
+                            <connections>
+                                <action selector="done" destination="XSa-Fn-ais" id="Gph-XY-7ca"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="imageView" destination="iM7-0S-pZj" id="VPc-ZS-8Hp"/>

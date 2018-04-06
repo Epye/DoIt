@@ -23,6 +23,15 @@ class AddItemViewController : UITableViewController{
     @IBOutlet weak var textFieldCategory: UITextField!
     @IBOutlet weak var imageView: UIImageView!
     
+    @IBAction func done() {
+        delegate?.addItem()
+    }
+    
+    @IBAction func cancel() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
     let picker = UIImagePickerController()
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -59,6 +68,7 @@ class AddItemViewController : UITableViewController{
         picker.delegate = self
     }
 }
+
 
 protocol AddItemViewControllerDelegate : class {
     func addItem()
