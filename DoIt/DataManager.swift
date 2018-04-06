@@ -9,7 +9,8 @@
 import Foundation
 import CoreData
 
-class DataManager {
+class DataManager : DataManagerProtocol{
+    
     var cachedItems = [Tache]()
     
     required init() {
