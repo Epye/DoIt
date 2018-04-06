@@ -40,6 +40,12 @@ class ListViewController: UIViewController {
     
     @IBAction func editAction(_ sender: Any) {
         tableView.isEditing = !tableView.isEditing
+        
+        let buttonType: UIBarButtonSystemItem = tableView.isEditing ? .done : .edit
+        
+        let leftButton = UIBarButtonItem(barButtonSystemItem: buttonType, target: self, action: #selector(editAction(_:)))
+        
+        navigationItem.setLeftBarButton(leftButton, animated: true)
     }
 }
 

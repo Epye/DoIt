@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 
 class DataManager {
     var items = [Item]()
@@ -23,30 +24,18 @@ class DataManager {
 
     //MARK: File
     func saveData(){
-        let encoder = JSONEncoder()
-        encoder.outputFormatting = .prettyPrinted
-        do{
-            let data = try encoder.encode(cachedItems)
-            try data.write(to: dataFileUrl)
-        } catch{
-            
-        }
+        saveContext()
     }
     
     func loadData(){
-        let decoder=JSONDecoder()
-        do{
-            let data = try String(contentsOf: dataFileUrl, encoding: String.Encoding.utf8).data(using: String.Encoding.utf8)
-            cachedItems = try decoder.decode([Item].self, from: data!)
-            items = cachedItems
-        }catch {
-            
-        }
+        
     }
     
     //MARK: Item
     func addItem(text: String){
-        let item = Item(name: text)
+        let item = Item(context: persistentContainer.viewContext)
+        item.name = text
+        item.checked = false
         cachedItems.append(item)
         saveData()
     }
@@ -76,7 +65,7 @@ class DataManager {
         if filter.isEmpty {
             items = cachedItems
         } else {
-            items = cachedItems.filter{ $0.name.range(of: filter, options: [.caseInsensitive, .diacriticInsensitive]) != nil }
+            items = cachedItems.filter{ $0.name?.range(of: filter, options: [.caseInsensitive, .diacriticInsensitive]) != nil }
         }
     }
     
@@ -84,5 +73,48 @@ class DataManager {
         let item = items[index]
         item.checked = !item.checked
         saveData()
+    }
+    
+    lazy var persistentContainer: NSPersistentContainer = {
+        /*
+         The persistent container for the application. This implementation
+         creates and returns a container, having loaded the store for the
+         application to it. This property is optional since there are legitimate
+         error conditions that could cause the creation of the store to fail.
+         */
+        let container = NSPersistentContainer(name: "DoIt")
+        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            if let error = error as NSError? {
+                // Replace this implementation with code to handle the error appropriately.
+                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                
+                /*
+                 Typical reasons for an error here include:
+                 * The parent directory does not exist, cannot be created, or disallows writing.
+                 * The persistent store is not accessible, due to permissions or data protection when the device is locked.
+                 * The device is out of space.
+                 * The store could not be migrated to the current model version.
+                 Check the error message to determine what the actual problem was.
+                 */
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        })
+        return container
+    }()
+    
+    // MARK: - Core Data Saving support
+    
+    func saveContext () {
+        let context = persistentContainer.viewContext
+        if context.hasChanges {
+            do {
+                try context.save()
+            } catch {
+                // Replace this implementation with code to handle the error appropriately.
+                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                let nserror = error as NSError
+                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            }
+        }
     }
 }
