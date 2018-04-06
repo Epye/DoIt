@@ -59,12 +59,14 @@ extension ListViewController:  UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ListViewCellIdentifier")
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ListViewCellIdentifier") as! ListTableViewCell
         let item = dataManager.getItem(index: indexPath.row)
-        cell?.textLabel?.text = item.nom
-        cell?.accessoryType = item.checked ? .checkmark : .none
-        
-        return cell!
+        cell.labelName?.text = item.nom
+        cell.labelCheckmark.isHidden = item.checked ? false : true
+        if let tag = item.tag {
+            cell.backgroundColor = tag.couleur as? UIColor
+        }
+        return cell
     }
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {

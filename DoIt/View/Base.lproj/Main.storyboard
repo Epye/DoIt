@@ -37,8 +37,30 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xZB-0L-MsI" id="YQO-bO-S9O">
                                             <rect key="frame" x="0.0" y="0.0" width="308" height="79.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="✓" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BuT-Lf-ZoM">
+                                                    <rect key="frame" x="8" y="28" width="17" height="24"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6oY-8X-3qW">
+                                                    <rect key="frame" x="33" y="30" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="6oY-8X-3qW" firstAttribute="centerY" secondItem="YQO-bO-S9O" secondAttribute="centerY" id="QPv-7D-kps"/>
+                                                <constraint firstItem="6oY-8X-3qW" firstAttribute="leading" secondItem="BuT-Lf-ZoM" secondAttribute="trailing" constant="8" id="aY5-HT-owe"/>
+                                                <constraint firstItem="BuT-Lf-ZoM" firstAttribute="leading" secondItem="YQO-bO-S9O" secondAttribute="leading" constant="8" id="tPD-9v-M9w"/>
+                                                <constraint firstItem="BuT-Lf-ZoM" firstAttribute="centerY" secondItem="YQO-bO-S9O" secondAttribute="centerY" id="yGF-Ur-Kcd"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="labelCheckmark" destination="BuT-Lf-ZoM" id="f2U-rE-Hg0"/>
+                                            <outlet property="labelName" destination="6oY-8X-3qW" id="9fH-U6-XNA"/>
                                             <segue destination="AMf-rA-Bh6" kind="presentation" identifier="editItem" trigger="accessoryAction" id="1hZ-BS-ddl"/>
                                         </connections>
                                     </tableViewCell>

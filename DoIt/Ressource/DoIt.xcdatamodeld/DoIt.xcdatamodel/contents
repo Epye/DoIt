@@ -20,18 +20,18 @@
         <attribute name="date_maj" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="descriptio" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="nom" attributeType="String" syncable="YES"/>
+        <relationship name="tag" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Tag" inverseName="tache" inverseEntity="Tag" syncable="YES"/>
     </entity>
     <entity name="Tag" representedClassName="Tag" syncable="YES" codeGenerationType="class">
-        <attribute name="couleur" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="date_crea" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="date_maj" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="couleur" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="nom" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="tache" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Tache" inverseName="tag" inverseEntity="Tache" syncable="YES"/>
     </entity>
     <elements>
         <element name="Categorie" positionX="-36" positionY="63" width="128" height="90"/>
         <element name="Dossier" positionX="126" positionY="-108" width="128" height="90"/>
         <element name="Image" positionX="-263" positionY="261" width="128" height="60"/>
-        <element name="Tache" positionX="-443" positionY="-6" width="128" height="135"/>
-        <element name="Tag" positionX="-189" positionY="-114" width="128" height="105"/>
+        <element name="Tache" positionX="-443" positionY="-6" width="128" height="150"/>
+        <element name="Tag" positionX="-189" positionY="-114" width="128" height="90"/>
     </elements>
 </model>
