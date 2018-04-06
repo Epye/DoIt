@@ -10,8 +10,8 @@ import Foundation
 import CoreData
 
 class DataManager {
-    var items = [Item]()
-    var cachedItems = [Item]()
+    var items = [Tache]()
+    var cachedItems = [Tache]()
     
     required init() {
         loadData()
@@ -23,7 +23,7 @@ class DataManager {
     }
     
     func loadData(){
-        let itemFetch = NSFetchRequest<Item>(entityName: "Item")
+        let itemFetch = NSFetchRequest<Tache>(entityName: "Tache")
         
         do {
             cachedItems = try persistentContainer.viewContext.fetch(itemFetch)
@@ -34,20 +34,20 @@ class DataManager {
         }
     }
     
-    //MARK: Item
+    //MARK: Tache
     func addItem(text: String){
-        let item = Item(context: persistentContainer.viewContext)
-        item.name = text
+        let item = Tache(context: persistentContainer.viewContext)
+        item.nom = text
         item.checked = false
         cachedItems.append(item)
         saveData()
     }
     
-    func getItems() -> [Item] {
+    func getItems() -> [Tache] {
         return items
     }
     
-    func getItem(index: Int) -> Item {
+    func getItem(index: Int) -> Tache {
         return items[index]
     }
     
@@ -60,7 +60,7 @@ class DataManager {
     
     func removeItem(index: Int) {
         let item = items.remove(at: index)
-        cachedItems = cachedItems.filter{ $0.name != item.name }
+        cachedItems = cachedItems.filter{ $0.nom != item.nom }
         let context = persistentContainer.viewContext
         context.delete(item)
         saveData()
@@ -70,7 +70,7 @@ class DataManager {
         if filter.isEmpty {
             items = cachedItems
         } else {
-            items = cachedItems.filter{ $0.name?.range(of: filter, options: [.caseInsensitive, .diacriticInsensitive]) != nil }
+            items = cachedItems.filter{ $0.nom?.range(of: filter, options: [.caseInsensitive, .diacriticInsensitive]) != nil }
         }
     }
     

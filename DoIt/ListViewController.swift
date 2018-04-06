@@ -59,7 +59,7 @@ extension ListViewController:  UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ListViewCellIdentifier")
         let item = dataManager.getItem(index: indexPath.row)
-        cell?.textLabel?.text = item.name
+        cell?.textLabel?.text = item.nom
         cell?.accessoryType = item.checked ? .checkmark : .none
         return cell!
     }
