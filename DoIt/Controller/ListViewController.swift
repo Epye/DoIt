@@ -108,7 +108,17 @@ extension ListViewController: UISearchBarDelegate {
 }
 
 extension ListViewController : AddItemViewControllerDelegate{
-    func addItem(){
+    func addItem(_ controller: AddItemViewController, didFinishAddingItem string: String) {
+    }
+    
+    
+    func addItem(_ controller: AddItemViewController, didFinishEditingItem tache: Tache) {
         
     }
+    
+    
+    func AddItemViewControllerDidCancel(_ controller: AddItemViewController) {
+        controller.dismiss(animated: true)
+    }
+    
 }

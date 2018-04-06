@@ -18,17 +18,25 @@ class AddItemViewController : UITableViewController{
     
     var delegate : AddItemViewControllerDelegate?
     var state: ViewState!
+    var tacheToEdit : Tache!
     
     @IBOutlet weak var textFieldName: UITextField!
     @IBOutlet weak var textFieldCategory: UITextField!
     @IBOutlet weak var imageView: UIImageView!
     
     @IBAction func done() {
-        delegate?.addItem()
+        if let nomTache = textFieldName.text {
+            if (tacheToEdit) != nil {
+                tacheToEdit.nom = nomTache
+                delegate?.addItem(self, didFinishEditingItem: tacheToEdit)
+            } else {
+                delegate?.addItem(self, didFinishAddingItem: nomTache)
+            }
+        }
     }
     
     @IBAction func cancel() {
-        self.dismiss(animated: true, completion: nil)
+        delegate?.AddItemViewControllerDidCancel(self)
     }
     
     
@@ -71,7 +79,9 @@ class AddItemViewController : UITableViewController{
 
 
 protocol AddItemViewControllerDelegate : class {
-    func addItem()
+    func AddItemViewControllerDidCancel(_ controller: AddItemViewController)
+    func addItem(_ controller: AddItemViewController, didFinishAddingItem string: String)
+    func addItem(_ controller: AddItemViewController, didFinishEditingItem tache: Tache)
 }
 
 extension AddItemViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
