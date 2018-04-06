@@ -88,10 +88,10 @@ extension ListViewController:  UITableViewDataSource, UITableViewDelegate {
             let navigationController = segue.destination as? UINavigationController,
             let destination = navigationController.topViewController as? AddItemViewController {
             
-            if identifier == "AddItem" {
+            if identifier == "addItem" {
                 destination.delegate = self
                 destination.state = ViewState.isAdd
-            } else if identifier == "EditItem" {
+            } else if identifier == "editItem" {
                 destination.delegate = self
                 destination.state = ViewState.isEdit
             }
