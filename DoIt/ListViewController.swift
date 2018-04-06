@@ -25,9 +25,10 @@ class ListViewController: UIViewController {
         
         let okAction = UIAlertAction(title: "OK", style: .default, handler: { (action) in
             let text = alertController.textFields?.first?.text
-            
-            self.dataManager.addItem(text: text!)
-            self.dataManager.filterItems(filter: self.searchBar.text!)
+            if !(text?.isEmpty)!{
+                self.dataManager.addItem(text: text!)
+                self.dataManager.filterItems(filter: self.searchBar.text!)
+            }
             
             self.tableView.reloadData()
         })
