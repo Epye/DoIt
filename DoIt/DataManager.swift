@@ -44,6 +44,7 @@ class DataManager {
         }
     }
     
+    //MARK: Item
     func addItem(text: String){
         let item = Item(name: text)
         cachedItems.append(item)
@@ -75,7 +76,7 @@ class DataManager {
         if filter.isEmpty {
             items = cachedItems
         } else {
-            items = cachedItems.filter{ $0.name.range(of: filter, options: .caseInsensitive) != nil }
+            items = cachedItems.filter{ $0.name.range(of: filter, options: [.caseInsensitive, .diacriticInsensitive]) != nil }
         }
     }
     
