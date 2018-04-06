@@ -64,19 +64,51 @@
 		B8EC84DC206E1FDE008711E7 /* DoIt */ = {
 			isa = PBXGroup;
 			children = (
-				B8EC84DD206E1FDE008711E7 /* AppDelegate.swift */,
-				B8EC84DF206E1FDE008711E7 /* ListViewController.swift */,
-				B8EC84E1206E1FDE008711E7 /* Main.storyboard */,
-				B8EC84E4206E1FDE008711E7 /* Assets.xcassets */,
-				B8EC84E6206E1FDE008711E7 /* LaunchScreen.storyboard */,
+				B8F4208E20779D0300A83398 /* Ressource */,
+				B8F4208D20779CED00A83398 /* View */,
+				B8F4208C20779C6F00A83398 /* Manager */,
+				B8F4208B20779C5100A83398 /* Controller */,
 				B8EC84E9206E1FDE008711E7 /* Info.plist */,
-				B8EC84EF206E241D008711E7 /* ListTableViewCell.swift */,
-				B8EC84F5206E7BB1008711E7 /* DataManager.swift */,
-				B83972A120775278004A9506 /* DoIt.xcdatamodeld */,
-				B8C956F5207776B900AA7E84 /* DataManagerProtocol.swift */,
-				B822757A20779024008681D8 /* AddItemViewController.swift */,
 			);
 			path = DoIt;
+			sourceTree = "<group>";
+		};
+		B8F4208B20779C5100A83398 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B8EC84DF206E1FDE008711E7 /* ListViewController.swift */,
+				B822757A20779024008681D8 /* AddItemViewController.swift */,
+				B8EC84DD206E1FDE008711E7 /* AppDelegate.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		B8F4208C20779C6F00A83398 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				B8EC84F5206E7BB1008711E7 /* DataManager.swift */,
+				B8C956F5207776B900AA7E84 /* DataManagerProtocol.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		B8F4208D20779CED00A83398 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B8EC84E6206E1FDE008711E7 /* LaunchScreen.storyboard */,
+				B8EC84E1206E1FDE008711E7 /* Main.storyboard */,
+				B8EC84EF206E241D008711E7 /* ListTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B8F4208E20779D0300A83398 /* Ressource */ = {
+			isa = PBXGroup;
+			children = (
+				B83972A120775278004A9506 /* DoIt.xcdatamodeld */,
+				B8EC84E4206E1FDE008711E7 /* Assets.xcassets */,
+			);
+			path = Ressource;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -295,7 +327,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = QLL3DR6XP5;
 				INFOPLIST_FILE = DoIt/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = lp.iem.nquillon.DoIt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -309,7 +343,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = QLL3DR6XP5;
 				INFOPLIST_FILE = DoIt/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = lp.iem.nquillon.DoIt;
 				PRODUCT_NAME = "$(TARGET_NAME)";

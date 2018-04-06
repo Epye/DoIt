@@ -24,6 +24,7 @@ class ListViewController: UIViewController {
         let alertController = UIAlertController(title: "DoIt", message: "New item", preferredStyle: .alert)
         
         let okAction = UIAlertAction(title: "OK", style: .default, handler: { (action) in
+            
             let text = alertController.textFields?.first?.text
             if !(text?.isEmpty)!{
                 self.dataManager.addItem(text: text!)
@@ -62,6 +63,7 @@ extension ListViewController:  UITableViewDataSource, UITableViewDelegate {
         let item = dataManager.getItem(index: indexPath.row)
         cell?.textLabel?.text = item.nom
         cell?.accessoryType = item.checked ? .checkmark : .none
+        
         return cell!
     }
     
@@ -82,14 +84,18 @@ extension ListViewController:  UITableViewDataSource, UITableViewDelegate {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-            if let identifier = segue.identifier,
-                let navigationController = segue.destination as? UINavigationController,
-                let destination = navigationController.topViewController as? AddItemViewController {
-                
-                if identifier == "AddItem", let cell = sender as? UITableViewCell {
-                    destination.delegate = self
-                }
+        if let identifier = segue.identifier,
+            let navigationController = segue.destination as? UINavigationController,
+            let destination = navigationController.topViewController as? AddItemViewController {
+            
+            if identifier == "AddItem" {
+                destination.delegate = self
+                destination.state = ViewState.isAdd
+            } else if identifier == "EditItem" {
+                destination.delegate = self
+                destination.state = ViewState.isEdit
             }
+        }
     }
 }
 
