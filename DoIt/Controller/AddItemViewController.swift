@@ -35,6 +35,7 @@ class AddItemViewController : UITableViewController, UITextFieldDelegate {
             if (tacheToEdit) != nil {
                 tacheToEdit.nom = nomTache
                 tacheToEdit.descriptio = textFieldDescription.text
+                tacheToEdit.image?.data = UIImageJPEGRepresentation(imageView.image!, 0.5)
                 delegate?.addItem(self, didFinishEditingItem: tacheToEdit)
             } else {
                 let item = Tache(context: context)
@@ -43,6 +44,7 @@ class AddItemViewController : UITableViewController, UITextFieldDelegate {
                 let order = self.dataManager.cachedItems.count + 1
                 item.order = Int64(order)
                 item.descriptio = textFieldDescription.text!
+                item.image?.data = UIImageJPEGRepresentation(imageView.image!, 0.5)
                 let tag = Tag(context: context)
                 tag.nom = color.name
                 tag.couleur = color.color
@@ -102,6 +104,9 @@ class AddItemViewController : UITableViewController, UITextFieldDelegate {
             self.navigationItem.title = "Edit Item"
             self.textFieldName.text = tacheToEdit.nom
             self.textFieldDescription.text = tacheToEdit.descriptio
+            if let data = tacheToEdit.image?.data{
+                self.imageView.image = UIImage(data: data)
+            }
         }
 
         textFieldName.delegate = self

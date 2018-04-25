@@ -41,13 +41,23 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+<<<<<<< Updated upstream
          contextName = "DataManager.loadData():DataManager.swift">
       </ContextState>
       <ContextState
          contextName = "ColorPickerViewController.tableView(_:cellForRowAt:):ColorPickerViewController.swift">
+=======
+         contextName = "AddItemViewController.done():AddItemViewController.swift">
+>>>>>>> Stashed changes
          <PersistentStrings>
             <PersistentString
-               value = "cell.color.backgroundColor">
+               value = "imageView.image">
+            </PersistentString>
+            <PersistentString
+               value = "tacheToEdit">
+            </PersistentString>
+            <PersistentString
+               value = "tacheToEdit.image.data">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
