@@ -14,7 +14,7 @@ enum ViewState: String{
     case isAdd = "add"
 }
 
-class AddItemViewController : UITableViewController{
+class AddItemViewController : UITableViewController, UITextFieldDelegate{
     
     var delegate : AddItemViewControllerDelegate?
     var state: ViewState!
@@ -74,7 +74,21 @@ class AddItemViewController : UITableViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         picker.delegate = self
+        
+        textFieldName.delegate = self
+        textFieldCategory.delegate = self
     }
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if(textField.returnKeyType == UIReturnKeyType.next){
+            textField.resignFirstResponder()
+            textFieldCategory.becomeFirstResponder()
+        }else if (textField.returnKeyType == UIReturnKeyType.done){
+            textField.resignFirstResponder()
+        }
+        return true;
+    }
+    
 }
 
 
