@@ -58,7 +58,7 @@ class AddItemViewController : UITableViewController, UITextFieldDelegate{
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if indexPath.row == 0 && indexPath.section == 2 {
+        if indexPath.row == 0 && indexPath.section == 3 {
             let alertController = UIAlertController(title: "DoIt", message: "Add a photo from Library or take it?", preferredStyle: .alert)
             
             let libraryAction = UIAlertAction(title: "Library", style: .default, handler: { (action) in
@@ -152,7 +152,7 @@ extension AddItemViewController: UIImagePickerControllerDelegate, UINavigationCo
 extension AddItemViewController: ColorPickerViewControllerDelegate {
     func ColorPickerViewControllerDidChoose(color: Color) {
         self.navigationController?.popViewController(animated: true)
-        self.tableView.cellForRow(at: IndexPath(row: 0, section: 3))?.detailTextLabel?.text = color.name
+        self.tableView.cellForRow(at: IndexPath(row: 0, section: 4))?.detailTextLabel?.text = color.name
     }
     
     
