@@ -35,7 +35,6 @@ class DataManager<T: NSManagedObject> : DataManagerProtocol{
     
     //MARK: T
     func addItem(item: T){
-        let item = T(context: persistentContainer.viewContext)
         cachedItems.append(item)
         saveData()
     }

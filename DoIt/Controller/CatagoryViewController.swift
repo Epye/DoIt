@@ -55,6 +55,12 @@ class CatagoryViewController: UITableViewController {
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        let item = self.dataManager.getItem(index: indexPath.row)
+        dataManager.removeItem(item: item)
+        tableView.deleteRows(at: [indexPath], with: .automatic)
+    }
+    
     
 }
 

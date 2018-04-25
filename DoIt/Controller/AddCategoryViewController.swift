@@ -22,6 +22,8 @@ class AddCategoryViewController: UITableViewController, UITextFieldDelegate {
             self.navigationItem.title = "Edit Category"
             textFieldSaisieCategory.text = categoryEdit.nom
         }
+        
+        textFieldSaisieCategory.delegate = self
     }
     
     @IBAction func done() {
