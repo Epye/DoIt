@@ -3,10 +3,10 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "AddItemViewController.done():AddItemViewController.swift">
+         contextName = "AddItemViewController.imagePickerController(_:didFinishPickingMediaWithInfo:):AddItemViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "tacheToEdit">
+               value = "self.tableView">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

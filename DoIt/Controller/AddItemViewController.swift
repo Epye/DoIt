@@ -99,6 +99,7 @@ extension AddItemViewController: UIImagePickerControllerDelegate, UINavigationCo
         let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         imageView.contentMode = .scaleAspectFit
         imageView.image = chosenImage
+        self.tableView.reloadData()
         dismiss(animated:true, completion: nil)
     }
 }

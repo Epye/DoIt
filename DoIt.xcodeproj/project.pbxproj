@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B819A0CF20906FAB0045E672 /* ColorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B819A0CE20906FAB0045E672 /* ColorPickerViewController.swift */; };
 		B822757B20779024008681D8 /* AddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B822757A20779024008681D8 /* AddItemViewController.swift */; };
 		B83972A320775278004A9506 /* DoIt.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B83972A120775278004A9506 /* DoIt.xcdatamodeld */; };
 		B8C956F6207776B900AA7E84 /* DataManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8C956F5207776B900AA7E84 /* DataManagerProtocol.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B819A0CE20906FAB0045E672 /* ColorPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerViewController.swift; sourceTree = "<group>"; };
 		B822757A20779024008681D8 /* AddItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
 		B83972A220775278004A9506 /* DoIt.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DoIt.xcdatamodel; sourceTree = "<group>"; };
 		B8C956F5207776B900AA7E84 /* DataManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManagerProtocol.swift; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 				B8EC84DF206E1FDE008711E7 /* ListViewController.swift */,
 				B822757A20779024008681D8 /* AddItemViewController.swift */,
 				B8EC84DD206E1FDE008711E7 /* AppDelegate.swift */,
+				B819A0CE20906FAB0045E672 /* ColorPickerViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -189,6 +192,7 @@
 				B8EC84DE206E1FDE008711E7 /* AppDelegate.swift in Sources */,
 				B822757B20779024008681D8 /* AddItemViewController.swift in Sources */,
 				B8EC84F0206E241D008711E7 /* ListTableViewCell.swift in Sources */,
+				B819A0CF20906FAB0045E672 /* ColorPickerViewController.swift in Sources */,
 				B8C956F6207776B900AA7E84 /* DataManagerProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
