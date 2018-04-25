@@ -22,6 +22,7 @@ class AddItemViewController : UITableViewController, UITextFieldDelegate {
     var dataManager: DataManager = DataManager<Categorie>()
     var pickerData : [String] = [String]()
     var context: NSManagedObjectContext!
+    var color: Color = Color(name: "white", color: UIColor.white)
     
     @IBOutlet weak var textFieldName: UITextField!
     @IBOutlet weak var pickerCategories: UIPickerView!
@@ -43,9 +44,12 @@ class AddItemViewController : UITableViewController, UITextFieldDelegate {
                 item.order = Int64(order)
                 item.descriptio = textFieldDescription.text!
                 let tag = Tag(context: context)
-                tag.nom = "yellow"
-                tag.couleur = UIColor.yellow
+                tag.nom = color.name
+                tag.couleur = color.color
                 item.tag = tag
+                let category = Categorie(context: context)
+                category.nom = pickerData[pickerCategories.selectedRow(inComponent: 0)]
+                item.categorie = category
                 delegate?.addItem(self, didFinishAddingItem: item)
             }
         }
@@ -156,6 +160,12 @@ extension AddItemViewController: ColorPickerViewControllerDelegate {
     func ColorPickerViewControllerDidChoose(color: Color) {
         self.navigationController?.popViewController(animated: true)
         self.tableView.cellForRow(at: IndexPath(row: 0, section: 4))?.detailTextLabel?.text = color.name
+        if let item = self.tacheToEdit {
+            item.tag?.nom = color.name
+            item.tag?.couleur = color.color
+        } else {
+            self.color = color
+        }
     }
 }
 

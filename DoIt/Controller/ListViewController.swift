@@ -21,6 +21,12 @@ class ListViewController: UIViewController, UISearchBarDelegate {
         searchBar.delegate = self
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        dataManager.loadData(filter: category.nom!)
+    }
+    
     //MARK: Actions
     @IBAction func editAction(_ sender: Any) {
         tableView.isEditing = !tableView.isEditing
@@ -108,6 +114,7 @@ extension ListViewController : AddItemViewControllerDelegate{
     func addItem(_ controller: AddItemViewController, didFinishAddingItem item: Tache) {
         controller.dismiss(animated: true)
         self.dataManager.addItem(item: item)
+        self.dataManager.loadData(filter: category.nom!)
         tableView.reloadData()
     }
     

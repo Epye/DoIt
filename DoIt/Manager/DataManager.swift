@@ -22,12 +22,15 @@ class DataManager<T: NSManagedObject> : DataManagerProtocol{
         saveContext()
     }
     
-    func loadData(){
+    func loadData(filter: String = ""){
         let entityName = String(describing: T.self)
         let request = NSFetchRequest<T>(entityName: entityName)
         if entityName == "Tache" {
             let sortDescriptorOrder = NSSortDescriptor(key: "order", ascending: true)
             request.sortDescriptors = [sortDescriptorOrder]
+        }
+        if filter != "" {
+            request.predicate = NSPredicate(format: "categorie.nom = %@", filter)
         }
         do {
             cachedItems = try persistentContainer.viewContext.fetch(request)
