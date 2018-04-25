@@ -14,7 +14,7 @@ enum ViewState: String{
     case isAdd = "add"
 }
 
-class AddItemViewController : UITableViewController{
+class AddItemViewController : UITableViewController, UITextFieldDelegate{
     
     var delegate : AddItemViewControllerDelegate?
     var state: ViewState!
@@ -24,6 +24,7 @@ class AddItemViewController : UITableViewController{
     @IBOutlet weak var textFieldCategory: UITextField!
     @IBOutlet weak var imageView: UIImageView!
     
+    //MARK: Actions
     @IBAction func done() {
         if let nomTache = textFieldName.text {
             if (tacheToEdit) != nil {
@@ -39,7 +40,7 @@ class AddItemViewController : UITableViewController{
         delegate?.AddItemViewControllerDidCancel(self)
     }
     
-    
+    //MARK: TableView
     let picker = UIImagePickerController()
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -71,24 +72,41 @@ class AddItemViewController : UITableViewController{
         }
     }
     
+    //MARK: ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         picker.delegate = self
+        
         if state == .isEdit {
             self.navigationItem.title = "Edit Item"
             self.textFieldName.text = tacheToEdit.nom
         }
 
+        textFieldName.delegate = self
+        textFieldCategory.delegate = self
     }
+
+    //MARK: User Experience
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if(textField.returnKeyType == UIReturnKeyType.next){
+            textField.resignFirstResponder()
+            textFieldCategory.becomeFirstResponder()
+        }else if (textField.returnKeyType == UIReturnKeyType.done){
+            textField.resignFirstResponder()
+        }
+        return true;
+    }
+    
 }
 
-
+//MARK: Protocols
 protocol AddItemViewControllerDelegate : class {
     func AddItemViewControllerDidCancel(_ controller: AddItemViewController)
     func addItem(_ controller: AddItemViewController, didFinishAddingItem name: String)
     func addItem(_ controller: AddItemViewController, didFinishEditingItem tache: Tache)
 }
 
+//MARK: Extensions
 extension AddItemViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
