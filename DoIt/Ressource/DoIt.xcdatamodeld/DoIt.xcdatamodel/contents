@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14133" systemVersion="17E199" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Categorie" representedClassName="Categorie" syncable="YES" codeGenerationType="class">
-        <attribute name="date_crea" attributeType="String" syncable="YES"/>
-        <attribute name="date_maj" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="nom" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Dossier" representedClassName="Dossier" syncable="YES" codeGenerationType="class">
@@ -28,7 +26,7 @@
         <relationship name="tache" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Tache" inverseName="tag" inverseEntity="Tache" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Categorie" positionX="-36" positionY="63" width="128" height="90"/>
+        <element name="Categorie" positionX="-36" positionY="63" width="128" height="60"/>
         <element name="Dossier" positionX="126" positionY="-108" width="128" height="90"/>
         <element name="Image" positionX="-263" positionY="261" width="128" height="60"/>
         <element name="Tache" positionX="-443" positionY="-6" width="128" height="150"/>

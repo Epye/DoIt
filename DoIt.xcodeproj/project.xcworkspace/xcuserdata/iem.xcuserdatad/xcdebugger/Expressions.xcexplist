@@ -10,5 +10,13 @@
             </PersistentString>
          </PersistentStrings>
       </ContextState>
+      <ContextState
+         contextName = "DataManager.addItem(item:):DataManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "cachedItems">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
    </ContextStates>
 </VariablesViewState>
