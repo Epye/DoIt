@@ -10,6 +10,8 @@ import UIKit
 
 class CatagoryViewController: UITableViewController {
 
+    let dataManager : DataManager = DataManager<Categorie>()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -33,7 +35,7 @@ class CatagoryViewController: UITableViewController {
         if segue.identifier == "showToDoList" {
             if let destVC = segue.destination as? ListViewController  {
                 let cell = sender as! UITableViewCell
-                //destVC.category = DataManager.getItems()
+                destVC.category = dataManager.getItem(index: (self.tableView.indexPath(for: cell)?.row)!)
             }
         }
         else if segue.identifier == "addCategory" {

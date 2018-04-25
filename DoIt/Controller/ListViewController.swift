@@ -13,8 +13,8 @@ class ListViewController: UIViewController, UISearchBarDelegate {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
-    let dataManager: DataManager = DataManager()
-    var category : Category!
+    let dataManager: DataManager = DataManager<Tache>()
+    var category : Categorie!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +29,9 @@ class ListViewController: UIViewController, UISearchBarDelegate {
             
             let text = alertController.textFields?.first?.text
             if !(text?.isEmpty)!{
-                self.dataManager.addItem(text: text!)
+                let item = Tache(context: self.dataManager.persistentContainer.viewContext)
+                item.nom = text
+                self.dataManager.addItem(item: item)
                 self.dataManager.filterItems(filter: self.searchBar.text!)
             }
             
@@ -84,12 +86,14 @@ extension ListViewController:  UITableViewDataSource, UITableViewDelegate {
     //MARK: UITableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        dataManager.toggleCheckItem(index: indexPath.row)
+        let item = self.dataManager.getItem(index: indexPath.row)
+        dataManager.toggleCheckItem(item: item )
         tableView.reloadRows(at: [indexPath], with: .automatic)
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        dataManager.removeItem(index: indexPath.row)
+        let item = self.dataManager.getItem(index: indexPath.row)
+        dataManager.removeItem(item: item)
         tableView.deleteRows(at: [indexPath], with: .automatic)
     }
     
@@ -105,7 +109,7 @@ extension ListViewController:  UITableViewDataSource, UITableViewDelegate {
                 let cell = sender as! UITableViewCell
                 destination.delegate = self
                 destination.state = ViewState.isEdit
-                destination.tacheToEdit = dataManager.getItem(index:(tableView.indexPath(for: cell)?.row)!)
+                destination.tacheToEdit = dataManager.getItem(index:(tableView.indexPath(for: cell)?.row)!) 
             }
         }
     }
@@ -122,7 +126,9 @@ extension ListViewController {
 extension ListViewController : AddItemViewControllerDelegate{
     func addItem(_ controller: AddItemViewController, didFinishAddingItem name: String) {
         controller.dismiss(animated: true)
-        dataManager.addItem(text : name)
+        let item = Tache(context: self.dataManager.persistentContainer.viewContext)
+        item.nom = name
+        self.dataManager.addItem(item: item)
         tableView.reloadData()
     }
     

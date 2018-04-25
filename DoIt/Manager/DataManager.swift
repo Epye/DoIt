@@ -9,9 +9,9 @@
 import Foundation
 import CoreData
 
-class DataManager : DataManagerProtocol{
+class DataManager<T: NSManagedObject> : DataManagerProtocol{
     
-    var cachedItems = [Tache]()
+    var cachedItems = [T]()
     
     required init() {
         loadData()
@@ -23,30 +23,28 @@ class DataManager : DataManagerProtocol{
     }
     
     func loadData(){
-        let itemFetch: NSFetchRequest<Tache> = Tache.fetchRequest()
-        
+        let entityName = String(describing: T.self)
+        let request = NSFetchRequest<T>(entityName: entityName)
         do {
-            cachedItems = try persistentContainer.viewContext.fetch(itemFetch)
+            cachedItems = try persistentContainer.viewContext.fetch(request)
+        } catch  {
+            print("Impossible to load the BD")
         }
-        catch {
-            debugPrint("Could not load the items from CoreData")
-        }
+        
     }
     
-    //MARK: Tache
-    func addItem(text: String){
-        let item = Tache(context: persistentContainer.viewContext)
-        item.nom = text
-        item.checked = false
+    //MARK: T
+    func addItem(item: T){
+        let item = T(context: persistentContainer.viewContext)
         cachedItems.append(item)
         saveData()
     }
     
-    func getItems() -> [Tache] {
+    func getItems() -> [T] {
         return cachedItems
     }
     
-    func getItem(index: Int) -> Tache {
+    func getItem(index: Int) -> T {
         return cachedItems[index]
     }
     
@@ -56,9 +54,8 @@ class DataManager : DataManagerProtocol{
         saveData()
     }
     
-    func removeItem(index: Int) {
-        let item = cachedItems[index]
-        cachedItems.remove(at: index)
+    func removeItem(item: T) {
+        cachedItems.remove(at: (cachedItems.index(of: item))!)
         let context = persistentContainer.viewContext
         context.delete(item)
         saveData()
@@ -69,7 +66,7 @@ class DataManager : DataManagerProtocol{
             loadData()
         } else {
             let sortDescriptor = NSSortDescriptor(key: "nom", ascending: true)
-            let fetchedTaches: NSFetchRequest<Tache> = Tache.fetchRequest()
+            let fetchedTaches: NSFetchRequest<T> = T.fetchRequest() as! NSFetchRequest<T>
             fetchedTaches.sortDescriptors = [sortDescriptor]
             fetchedTaches.predicate = NSPredicate(format: "nom contains[cd] %@", filter)
             do {
@@ -81,8 +78,7 @@ class DataManager : DataManagerProtocol{
         }
     }
     
-    func toggleCheckItem(index: Int){
-        let item = cachedItems[index]
+    func toggleCheckItem(item: Tache){
         item.checked = !item.checked
         saveData()
     }

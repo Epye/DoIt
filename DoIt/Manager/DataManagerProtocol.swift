@@ -10,14 +10,14 @@ import Foundation
 
 protocol DataManagerProtocol : class {
     
-    func addItem(text: String)
+    associatedtype T
+    
+    func addItem(item: T)
     
     func moveItem(sourceIndex: Int, destinationIndex: Int)
     
-    func removeItem(index: Int)
+    func removeItem(item: T)
     
     func filterItems(filter: String)
-    
-    func toggleCheckItem(index: Int)
     
 }
