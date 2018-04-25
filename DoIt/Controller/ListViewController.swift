@@ -21,19 +21,15 @@ class ListViewController: UIViewController, UISearchBarDelegate {
         searchBar.delegate = self
     }
     
-    //MARK: Actions    
-    @IBAction func backAction(_ sender: Any) {
-        self.dismiss(animated: true)
-    }
-    
+    //MARK: Actions
     @IBAction func editAction(_ sender: Any) {
         tableView.isEditing = !tableView.isEditing
         
         let buttonType: UIBarButtonSystemItem = tableView.isEditing ? .done : .edit
-        
-        let leftButton = UIBarButtonItem(barButtonSystemItem: buttonType, target: self, action: #selector(editAction(_:)))
-        
-        navigationItem.setLeftBarButton(leftButton, animated: true)
+        let rightButton = UIBarButtonItem(barButtonSystemItem: buttonType, target: self, action: #selector(editAction(_:)))
+        var rightButons = navigationItem.rightBarButtonItems
+        rightButons![1] = rightButton
+        navigationItem.setRightBarButtonItems(rightButons, animated: true)
     }
     
     //MARK: User Experience
@@ -57,6 +53,8 @@ extension ListViewController:  UITableViewDataSource, UITableViewDelegate {
         cell.labelCheckmark.isHidden = item.checked ? false : true
         if let tag = item.tag {
             cell.backgroundColor = tag.couleur as? UIColor
+        } else {
+            cell.backgroundColor = UIColor.white
         }
         return cell
     }
@@ -69,7 +67,7 @@ extension ListViewController:  UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let item = self.dataManager.getItem(index: indexPath.row)
-        dataManager.toggleCheckItem(item: item )
+        dataManager.toggleCheckItem(item: item)
         tableView.reloadRows(at: [indexPath], with: .automatic)
     }
     

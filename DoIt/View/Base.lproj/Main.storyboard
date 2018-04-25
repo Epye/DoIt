@@ -76,11 +76,6 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="ToDoList" id="g6H-G0-KPX">
-                        <barButtonItem key="leftBarButtonItem" title="Back" id="afo-eL-cWf">
-                            <connections>
-                                <action selector="backAction:" destination="BYZ-38-t0r" id="9Dk-d4-e3U"/>
-                            </connections>
-                        </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem systemItem="add" id="8aI-6t-gFo">
                                 <connections>
