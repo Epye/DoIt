@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ListViewController: UIViewController {
+class ListViewController: UIViewController, UISearchBarDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -17,6 +17,7 @@ class ListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        searchBar.delegate = self
     }
     
     //MARK: Actions
@@ -48,6 +49,12 @@ class ListViewController: UIViewController {
         let leftButton = UIBarButtonItem(barButtonSystemItem: buttonType, target: self, action: #selector(editAction(_:)))
         
         navigationItem.setLeftBarButton(leftButton, animated: true)
+    }
+    
+    //MARK: User Experience
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar)
+    {
+        searchBar.endEditing(true)
     }
 }
 
@@ -101,7 +108,7 @@ extension ListViewController:  UITableViewDataSource, UITableViewDelegate {
     }
 }
 
-extension ListViewController: UISearchBarDelegate {
+extension ListViewController {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         dataManager.filterItems(filter: searchText)

@@ -24,6 +24,7 @@ class AddItemViewController : UITableViewController, UITextFieldDelegate{
     @IBOutlet weak var textFieldCategory: UITextField!
     @IBOutlet weak var imageView: UIImageView!
     
+    //MARK: Actions
     @IBAction func done() {
         if let nomTache = textFieldName.text {
             if (tacheToEdit) != nil {
@@ -39,7 +40,7 @@ class AddItemViewController : UITableViewController, UITextFieldDelegate{
         delegate?.AddItemViewControllerDidCancel(self)
     }
     
-    
+    //MARK: TableView
     let picker = UIImagePickerController()
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -71,6 +72,7 @@ class AddItemViewController : UITableViewController, UITextFieldDelegate{
         }
     }
     
+    //MARK: ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         picker.delegate = self
@@ -79,6 +81,7 @@ class AddItemViewController : UITableViewController, UITextFieldDelegate{
         textFieldCategory.delegate = self
     }
 
+    //MARK: User Experience
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if(textField.returnKeyType == UIReturnKeyType.next){
             textField.resignFirstResponder()
@@ -91,13 +94,14 @@ class AddItemViewController : UITableViewController, UITextFieldDelegate{
     
 }
 
-
+//MARK: Protocols
 protocol AddItemViewControllerDelegate : class {
     func AddItemViewControllerDidCancel(_ controller: AddItemViewController)
     func addItem(_ controller: AddItemViewController, didFinishAddingItem name: String)
     func addItem(_ controller: AddItemViewController, didFinishEditingItem tache: Tache)
 }
 
+//MARK: Extensions
 extension AddItemViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
