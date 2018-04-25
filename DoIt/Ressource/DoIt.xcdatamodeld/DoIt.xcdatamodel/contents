@@ -2,11 +2,8 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14133" systemVersion="17E199" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Categorie" representedClassName="Categorie" syncable="YES" codeGenerationType="class">
         <attribute name="nom" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="tache" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Tache" syncable="YES"/>
     </entity>
     <entity name="Dossier" representedClassName="Dossier" syncable="YES" codeGenerationType="class">
-        <attribute name="date_crea" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="date_maj" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="nom" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Image" representedClassName="Image" syncable="YES" codeGenerationType="class">
@@ -18,6 +15,8 @@
         <attribute name="descriptio" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="nom" attributeType="String" syncable="YES"/>
         <attribute name="order" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="categorie" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Categorie" syncable="YES"/>
+        <relationship name="image" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Image" syncable="YES"/>
         <relationship name="tag" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Tag" syncable="YES"/>
     </entity>
     <entity name="Tag" representedClassName="Tag" syncable="YES" codeGenerationType="class">
@@ -25,10 +24,10 @@
         <attribute name="nom" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Categorie" positionX="-36" positionY="63" width="128" height="75"/>
-        <element name="Dossier" positionX="126" positionY="-108" width="128" height="90"/>
+        <element name="Categorie" positionX="-36" positionY="63" width="128" height="60"/>
+        <element name="Dossier" positionX="126" positionY="-108" width="128" height="60"/>
         <element name="Image" positionX="-263" positionY="261" width="128" height="60"/>
-        <element name="Tache" positionX="-443" positionY="-6" width="128" height="135"/>
+        <element name="Tache" positionX="-443" positionY="-6" width="128" height="165"/>
         <element name="Tag" positionX="-189" positionY="-114" width="128" height="75"/>
     </elements>
 </model>
