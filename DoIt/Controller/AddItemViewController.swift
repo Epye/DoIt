@@ -14,16 +14,17 @@ enum ViewState: String{
     case isAdd = "add"
 }
 
-class AddItemViewController : UITableViewController, UITextFieldDelegate{
+class AddItemViewController : UITableViewController, UITextFieldDelegate {
     
     var delegate : AddItemViewControllerDelegate?
     var state: ViewState!
     var tacheToEdit : Tache!
-    var dataManager: DataManager = DataManager<Tache>()
+    var dataManager: DataManager = DataManager<Categorie>()
+    var pickerData : [String] = [String]()
     var context: NSManagedObjectContext!
     
     @IBOutlet weak var textFieldName: UITextField!
-    @IBOutlet weak var textFieldCategory: UITextField!
+    @IBOutlet weak var pickerCategories: UIPickerView!
     @IBOutlet weak var textFieldDescription: UITextField!
     @IBOutlet weak var imageView: UIImageView!
     
@@ -100,7 +101,11 @@ class AddItemViewController : UITableViewController, UITextFieldDelegate{
         }
 
         textFieldName.delegate = self
-        textFieldCategory.delegate = self
+        pickerCategories.delegate = self
+        pickerCategories.dataSource = self
+        for item in dataManager.getItems() {
+            pickerData.append(item.nom!)
+        }
         textFieldDescription.delegate = self
     }
 
@@ -110,9 +115,6 @@ class AddItemViewController : UITableViewController, UITextFieldDelegate{
             textField.resignFirstResponder()
             textFieldDescription.becomeFirstResponder()
         }else if (textField == textFieldDescription){
-            textField.resignFirstResponder()
-            textFieldCategory.becomeFirstResponder()
-        }else if(textField == textFieldCategory){
             textField.resignFirstResponder()
         }
         return true;
@@ -155,6 +157,22 @@ extension AddItemViewController: ColorPickerViewControllerDelegate {
         self.navigationController?.popViewController(animated: true)
         self.tableView.cellForRow(at: IndexPath(row: 0, section: 4))?.detailTextLabel?.text = color.name
     }
+}
+
+
+extension AddItemViewController :UIPickerViewDelegate, UIPickerViewDataSource {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+       return pickerData.count
+    }
     
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+       return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return pickerData[row]
+    }
+    
+
     
 }

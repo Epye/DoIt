@@ -16,6 +16,15 @@ class CatagoryViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.reloadData()
+        
+        if dataManager.getItems().count == 0 {
+            let pickerData = ["Cours", "Maison", "Ménage", "Courses"]
+            for item in pickerData {
+                let category = Categorie(context : dataManager.persistentContainer.viewContext)
+                category.nom = item
+                dataManager.addItem(item: category)
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
