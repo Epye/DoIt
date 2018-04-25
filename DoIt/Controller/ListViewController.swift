@@ -124,10 +124,14 @@ extension ListViewController {
 }
 
 extension ListViewController : AddItemViewControllerDelegate{
-    func addItem(_ controller: AddItemViewController, didFinishAddingItem name: String) {
+    func addItem(_ controller: AddItemViewController, didFinishAddingItem name: String, desc: String) {
         controller.dismiss(animated: true)
         let item = Tache(context: self.dataManager.persistentContainer.viewContext)
         item.nom = name
+        item.checked = false
+        let order = self.dataManager.cachedItems.count + 1
+        item.order = Int64(order)
+        item.descriptio = desc
         self.dataManager.addItem(item: item)
         tableView.reloadData()
     }

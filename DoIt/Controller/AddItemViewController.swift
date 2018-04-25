@@ -22,6 +22,7 @@ class AddItemViewController : UITableViewController, UITextFieldDelegate{
     
     @IBOutlet weak var textFieldName: UITextField!
     @IBOutlet weak var textFieldCategory: UITextField!
+    @IBOutlet weak var textFieldDescription: UITextField!
     @IBOutlet weak var imageView: UIImageView!
     
     //MARK: Actions
@@ -29,9 +30,10 @@ class AddItemViewController : UITableViewController, UITextFieldDelegate{
         if let nomTache = textFieldName.text {
             if (tacheToEdit) != nil {
                 tacheToEdit.nom = nomTache
+                tacheToEdit.descriptio = textFieldDescription.text
                 delegate?.addItem(self, didFinishEditingItem: tacheToEdit)
             } else {
-                delegate?.addItem(self, didFinishAddingItem: nomTache)
+                delegate?.addItem(self, didFinishAddingItem: nomTache, desc: textFieldDescription.text!)
             }
         }
     }
@@ -77,21 +79,28 @@ class AddItemViewController : UITableViewController, UITextFieldDelegate{
         super.viewDidLoad()
         picker.delegate = self
         
+        self.textFieldDescription.text = ""
+        
         if state == .isEdit {
             self.navigationItem.title = "Edit Item"
             self.textFieldName.text = tacheToEdit.nom
+            self.textFieldDescription.text = tacheToEdit.descriptio
         }
 
         textFieldName.delegate = self
         textFieldCategory.delegate = self
+        textFieldDescription.delegate = self
     }
 
     //MARK: User Experience
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if(textField.returnKeyType == UIReturnKeyType.next){
+        if(textField == textFieldName){
+            textField.resignFirstResponder()
+            textFieldDescription.becomeFirstResponder()
+        }else if (textField == textFieldDescription){
             textField.resignFirstResponder()
             textFieldCategory.becomeFirstResponder()
-        }else if (textField.returnKeyType == UIReturnKeyType.done){
+        }else if(textField == textFieldCategory){
             textField.resignFirstResponder()
         }
         return true;
@@ -102,7 +111,7 @@ class AddItemViewController : UITableViewController, UITextFieldDelegate{
 //MARK: Protocols
 protocol AddItemViewControllerDelegate : class {
     func AddItemViewControllerDidCancel(_ controller: AddItemViewController)
-    func addItem(_ controller: AddItemViewController, didFinishAddingItem name: String)
+    func addItem(_ controller: AddItemViewController, didFinishAddingItem name: String, desc: String)
     func addItem(_ controller: AddItemViewController, didFinishEditingItem tache: Tache)
 }
 

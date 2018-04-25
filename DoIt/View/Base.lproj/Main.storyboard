@@ -130,10 +130,36 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection id="Bb7-62-oK1">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="addItemCell" id="cmY-RV-qK2">
+                                        <rect key="frame" x="0.0" y="115" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cmY-RV-qK2" id="1nA-BL-tDL">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QVW-98-j3x" userLabel="Text Field Description">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                                    <nil key="textColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="QVW-98-j3x" secondAttribute="trailing" id="52l-8L-O6b"/>
+                                                <constraint firstAttribute="bottom" secondItem="QVW-98-j3x" secondAttribute="bottom" id="BiU-Mi-h0D"/>
+                                                <constraint firstItem="QVW-98-j3x" firstAttribute="leading" secondItem="1nA-BL-tDL" secondAttribute="leading" id="H4q-iU-NSb"/>
+                                                <constraint firstItem="QVW-98-j3x" firstAttribute="top" secondItem="1nA-BL-tDL" secondAttribute="top" id="f5v-cI-t2N"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                             <tableViewSection id="v2A-DZ-O9z">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="addItemCell" id="rad-sZ-Lke">
-                                        <rect key="frame" x="0.0" y="115" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="195" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rad-sZ-Lke" id="wR1-vN-Djd">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -158,7 +184,7 @@
                             <tableViewSection id="YBJ-YX-xoh">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="addItemCell" textLabel="5fh-eM-kJW" detailTextLabel="aJy-7L-692" style="IBUITableViewCellStyleValue1" id="orM-EI-QeR">
-                                        <rect key="frame" x="0.0" y="195" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="275" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="orM-EI-QeR" id="r5y-Ay-hyO">
                                             <rect key="frame" x="0.0" y="0.0" width="341" height="43.5"/>
@@ -182,7 +208,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="PhotoCell" id="bpM-z9-bXx">
-                                        <rect key="frame" x="0.0" y="239" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="319" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bpM-z9-bXx" id="42A-nE-jFu">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -200,7 +226,7 @@
                             <tableViewSection id="9f0-P8-uGX">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="addItemCell" textLabel="goZ-of-gsL" detailTextLabel="bcr-oR-PYY" style="IBUITableViewCellStyleValue1" id="3FF-Ac-kxa">
-                                        <rect key="frame" x="0.0" y="319" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="399" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3FF-Ac-kxa" id="XqC-1t-JRX">
                                             <rect key="frame" x="0.0" y="0.0" width="341" height="43.5"/>
@@ -249,6 +275,7 @@
                     <connections>
                         <outlet property="imageView" destination="eNG-id-TG9" id="VbS-yQ-bWA"/>
                         <outlet property="textFieldCategory" destination="bvl-iu-hSk" id="1Oj-0b-4iC"/>
+                        <outlet property="textFieldDescription" destination="QVW-98-j3x" id="t0y-RK-DPJ"/>
                         <outlet property="textFieldName" destination="4Kt-y2-QGN" id="LaN-ig-3Om"/>
                     </connections>
                 </tableViewController>
@@ -328,7 +355,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                                 </textField>
                                             </subviews>
                                             <constraints>

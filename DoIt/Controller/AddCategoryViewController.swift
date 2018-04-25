@@ -68,6 +68,11 @@ class AddCategoryViewController: UITableViewController, UITextFieldDelegate {
         }
         return false
     }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }
 
 protocol AddCategoryViewControllerDelegate : class {
