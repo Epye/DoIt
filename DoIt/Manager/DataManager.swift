@@ -52,7 +52,7 @@ class DataManager<T: NSManagedObject> : DataManagerProtocol{
     
     func moveItem(sourceIndex: Int, destinationIndex: Int){
         let itemSource = cachedItems[sourceIndex] as! Tache
-        let itemDest = cachedItems[sourceIndex] as! Tache
+        let itemDest = cachedItems[destinationIndex] as! Tache
         itemSource.order = Int64(destinationIndex)
         itemDest.order = Int64(sourceIndex)
         saveData()

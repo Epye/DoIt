@@ -3,6 +3,20 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "DataManager.moveItem(sourceIndex:destinationIndex:):DataManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "itemSource.order">
+            </PersistentString>
+            <PersistentString
+               value = "cachedItems[1].order">
+            </PersistentString>
+            <PersistentString
+               value = "cachedItems">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "AddItemViewController.imagePickerController(_:didFinishPickingMediaWithInfo:):AddItemViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -17,6 +31,9 @@
                value = "cachedItems">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DataManager.loadData():DataManager.swift">
       </ContextState>
       <ContextState
          contextName = "ColorPickerViewController.tableView(_:cellForRowAt:):ColorPickerViewController.swift">
