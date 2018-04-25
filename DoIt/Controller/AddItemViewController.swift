@@ -77,6 +77,11 @@ class AddItemViewController : UITableViewController, UITextFieldDelegate{
         super.viewDidLoad()
         picker.delegate = self
         
+        if state == .isEdit {
+            self.navigationItem.title = "Edit Item"
+            self.textFieldName.text = tacheToEdit.nom
+        }
+
         textFieldName.delegate = self
         textFieldCategory.delegate = self
     }
@@ -112,6 +117,7 @@ extension AddItemViewController: UIImagePickerControllerDelegate, UINavigationCo
         let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         imageView.contentMode = .scaleAspectFit
         imageView.image = chosenImage
+        self.tableView.reloadData()
         dismiss(animated:true, completion: nil)
     }
 }
