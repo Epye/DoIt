@@ -14,6 +14,7 @@ class ListViewController: UIViewController, UISearchBarDelegate {
     @IBOutlet weak var searchBar: UISearchBar!
     
     let dataManager: DataManager = DataManager()
+    var category : Category!
     
     override func viewDidLoad() {
         super.viewDidLoad()
