@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="xsN-i7-uDU">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="xsN-i7-uDU">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -75,17 +76,24 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="ToDoList" id="g6H-G0-KPX">
-                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="qhZ-Y8-Q18">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="afo-eL-cWf">
                             <connections>
-                                <action selector="editAction:" destination="BYZ-38-t0r" id="RYt-da-2Dy"/>
+                                <action selector="backAction:" destination="BYZ-38-t0r" id="9Dk-d4-e3U"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="8aI-6t-gFo">
-                            <connections>
-                                <action selector="addAction:" destination="BYZ-38-t0r" id="Gve-Sx-bCK"/>
-                                <segue destination="AMf-rA-Bh6" kind="presentation" identifier="addItem" id="83a-Uf-TSf"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="8aI-6t-gFo">
+                                <connections>
+                                    <action selector="addAction:" destination="BYZ-38-t0r" id="Gve-Sx-bCK"/>
+                                    <segue destination="AMf-rA-Bh6" kind="presentation" identifier="addItem" id="83a-Uf-TSf"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="edit" id="qhZ-Y8-Q18">
+                                <connections>
+                                    <action selector="editAction:" destination="BYZ-38-t0r" id="RYt-da-2Dy"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="searchBar" destination="0xD-F6-gtF" id="AT4-d6-Etz"/>
@@ -283,16 +291,16 @@
             </objects>
             <point key="canvasLocation" x="2288.8000000000002" y="117.39130434782609"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Color Picker View Controller-->
         <scene sceneID="ZPh-J2-6Oh">
             <objects>
-                <tableViewController id="Ks7-sH-6YC" sceneMemberID="viewController">
+                <tableViewController id="Ks7-sH-6YC" customClass="ColorPickerViewController" customModule="DoIt" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Agn-6V-Hf6">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="35a-e0-X3I">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ColorCell" id="35a-e0-X3I" customClass="ColorPickerTableViewCell" customModule="DoIt" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="35a-e0-X3I" id="1de-pO-2t8">
@@ -300,11 +308,22 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PZj-Xc-qVO">
-                                            <rect key="frame" x="311" y="6" width="48" height="30"/>
+                                            <rect key="frame" x="13" y="-3" width="48" height="48"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1dZ-bO-BNR">
+                                            <rect key="frame" x="69" y="11" width="290" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="color" destination="PZj-Xc-qVO" id="hjG-ig-ybK"/>
+                                    <outlet property="name" destination="1dZ-bO-BNR" id="seV-C9-7Pd"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>

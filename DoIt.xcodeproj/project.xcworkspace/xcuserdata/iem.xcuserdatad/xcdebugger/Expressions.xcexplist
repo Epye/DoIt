@@ -18,5 +18,13 @@
             </PersistentString>
          </PersistentStrings>
       </ContextState>
+      <ContextState
+         contextName = "ColorPickerViewController.tableView(_:cellForRowAt:):ColorPickerViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "cell.color.backgroundColor">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
    </ContextStates>
 </VariablesViewState>

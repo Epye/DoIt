@@ -19,6 +19,7 @@ class AddItemViewController : UITableViewController, UITextFieldDelegate{
     var delegate : AddItemViewControllerDelegate?
     var state: ViewState!
     var tacheToEdit : Tache!
+    var dataManager: DataManager = DataManager<Tache>()
     
     @IBOutlet weak var textFieldName: UITextField!
     @IBOutlet weak var textFieldCategory: UITextField!
@@ -33,7 +34,17 @@ class AddItemViewController : UITableViewController, UITextFieldDelegate{
                 tacheToEdit.descriptio = textFieldDescription.text
                 delegate?.addItem(self, didFinishEditingItem: tacheToEdit)
             } else {
-                delegate?.addItem(self, didFinishAddingItem: nomTache, desc: textFieldDescription.text!)
+                let item = Tache(context: self.dataManager.persistentContainer.viewContext)
+                item.nom = nomTache
+                item.checked = false
+                let order = self.dataManager.cachedItems.count + 1
+                item.order = Int64(order)
+                item.descriptio = textFieldDescription.text!
+                let tag = Tag(context: dataManager.persistentContainer.viewContext)
+                tag.nom = "yellow"
+                tag.couleur = UIColor.yellow
+                item.tag = tag
+                delegate?.addItem(self, didFinishAddingItem: item)
             }
         }
     }
@@ -106,12 +117,19 @@ class AddItemViewController : UITableViewController, UITextFieldDelegate{
         return true;
     }
     
+    //MARK: Segue
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "pickColor" {
+            let dest = segue.destination as? ColorPickerViewController
+            dest?.delegate = self
+        }
+    }
 }
 
 //MARK: Protocols
 protocol AddItemViewControllerDelegate : class {
     func AddItemViewControllerDidCancel(_ controller: AddItemViewController)
-    func addItem(_ controller: AddItemViewController, didFinishAddingItem name: String, desc: String)
+    func addItem(_ controller: AddItemViewController, didFinishAddingItem item: Tache)
     func addItem(_ controller: AddItemViewController, didFinishEditingItem tache: Tache)
 }
 
@@ -129,4 +147,13 @@ extension AddItemViewController: UIImagePickerControllerDelegate, UINavigationCo
         self.tableView.reloadData()
         dismiss(animated:true, completion: nil)
     }
+}
+
+extension AddItemViewController: ColorPickerViewControllerDelegate {
+    func ColorPickerViewControllerDidChoose(color: Color) {
+        self.navigationController?.popViewController(animated: true)
+        self.tableView.cellForRow(at: IndexPath(row: 0, section: 3))?.detailTextLabel?.text = color.name
+    }
+    
+    
 }

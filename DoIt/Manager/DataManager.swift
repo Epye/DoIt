@@ -30,7 +30,6 @@ class DataManager<T: NSManagedObject> : DataManagerProtocol{
         } catch  {
             print("Impossible to load the BD")
         }
-        
     }
     
     //MARK: T
@@ -72,7 +71,7 @@ class DataManager<T: NSManagedObject> : DataManagerProtocol{
                 cachedItems = try persistentContainer.viewContext.fetch(fetchedTaches)
             }
             catch {
-                debugPrint("Could not load the items from CoreData")
+                debugPrint("Could not load the items from CoreData : \(error.localizedDescription)")
             }
         }
     }

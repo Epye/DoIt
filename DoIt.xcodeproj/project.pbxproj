@@ -12,6 +12,7 @@
 		B83972A320775278004A9506 /* DoIt.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B83972A120775278004A9506 /* DoIt.xcdatamodeld */; };
 		B8C956F6207776B900AA7E84 /* DataManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8C956F5207776B900AA7E84 /* DataManagerProtocol.swift */; };
 		B8E4D91120907D0B009FA7B1 /* CatagoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E4D91020907D0B009FA7B1 /* CatagoryViewController.swift */; };
+		B8E985E92090A39100E68EC1 /* ColorPickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E985E82090A39100E68EC1 /* ColorPickerTableViewCell.swift */; };
 		B8E4D9132090867E009FA7B1 /* AddCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E4D9122090867E009FA7B1 /* AddCategoryViewController.swift */; };
 		B8EC84DE206E1FDE008711E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EC84DD206E1FDE008711E7 /* AppDelegate.swift */; };
 		B8EC84E0206E1FDE008711E7 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EC84DF206E1FDE008711E7 /* ListViewController.swift */; };
@@ -28,6 +29,7 @@
 		B83972A220775278004A9506 /* DoIt.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DoIt.xcdatamodel; sourceTree = "<group>"; };
 		B8C956F5207776B900AA7E84 /* DataManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManagerProtocol.swift; sourceTree = "<group>"; };
 		B8E4D91020907D0B009FA7B1 /* CatagoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatagoryViewController.swift; sourceTree = "<group>"; };
+		B8E985E82090A39100E68EC1 /* ColorPickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerTableViewCell.swift; sourceTree = "<group>"; };
 		B8E4D9122090867E009FA7B1 /* AddCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryViewController.swift; sourceTree = "<group>"; };
 		B8EC84DA206E1FDE008711E7 /* DoIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8EC84DD206E1FDE008711E7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 				B8EC84E6206E1FDE008711E7 /* LaunchScreen.storyboard */,
 				B8EC84E1206E1FDE008711E7 /* Main.storyboard */,
 				B8EC84EF206E241D008711E7 /* ListTableViewCell.swift */,
+				B8E985E82090A39100E68EC1 /* ColorPickerTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -197,6 +200,7 @@
 				B8EC84E0206E1FDE008711E7 /* ListViewController.swift in Sources */,
 				B83972A320775278004A9506 /* DoIt.xcdatamodeld in Sources */,
 				B8EC84DE206E1FDE008711E7 /* AppDelegate.swift in Sources */,
+				B8E985E92090A39100E68EC1 /* ColorPickerTableViewCell.swift in Sources */,
 				B822757B20779024008681D8 /* AddItemViewController.swift in Sources */,
 				B8E4D9132090867E009FA7B1 /* AddCategoryViewController.swift in Sources */,
 				B8EC84F0206E241D008711E7 /* ListTableViewCell.swift in Sources */,

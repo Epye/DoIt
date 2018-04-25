@@ -15,7 +15,7 @@ class CatagoryViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {

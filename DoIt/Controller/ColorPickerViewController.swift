@@ -12,15 +12,17 @@ class Color {
     var name: String
     var color: UIColor!
     
-    init(name: String) {
+    init(name: String, color: UIColor) {
         self.name = name
-        self.color = UIColor(named: name)
+        self.color = color
     }
 }
 
 class ColorPickerViewController: UITableViewController {
 
-    var listColors: Array = [Color(name: "white"), Color(name: "yellow"), Color(name: "blue"), Color(name: "green"), Color(name: "red"), Color(name: "purple"), Color(name: "pink")]
+    var delegate: ColorPickerViewControllerDelegate!
+    
+    var listColors: Array = [Color(name: "white", color: UIColor.white), Color(name: "yellow", color: UIColor.yellow), Color(name: "blue", color: UIColor.blue), Color(name: "green", color: UIColor.green), Color(name: "red", color: UIColor.red), Color(name: "purple", color: UIColor.purple), Color(name: "magenta", color: UIColor.magenta)]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,9 +33,19 @@ class ColorPickerViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-        cell.textLabel?.text = listColors[indexPath.row].name
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ColorCell", for: indexPath) as! ColorPickerTableViewCell
+        cell.name.text = listColors[indexPath.row].name
+        cell.color.backgroundColor = listColors[indexPath.row].color
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        delegate.ColorPickerViewControllerDidChoose(color: listColors[indexPath.row])
+    }
 
+}
+
+//MARK: Protocols
+protocol ColorPickerViewControllerDelegate : class {
+    func ColorPickerViewControllerDidChoose(color: Color)
 }

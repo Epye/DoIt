@@ -21,27 +21,9 @@ class ListViewController: UIViewController, UISearchBarDelegate {
         searchBar.delegate = self
     }
     
-    //MARK: Actions
-    @IBAction func addAction(_ sender: Any) {
-        let alertController = UIAlertController(title: "DoIt", message: "New item", preferredStyle: .alert)
-        
-        let okAction = UIAlertAction(title: "OK", style: .default, handler: { (action) in
-            
-            let text = alertController.textFields?.first?.text
-            if !(text?.isEmpty)!{
-                let item = Tache(context: self.dataManager.persistentContainer.viewContext)
-                item.nom = text
-                self.dataManager.addItem(item: item)
-                self.dataManager.filterItems(filter: self.searchBar.text!)
-            }
-            
-            self.tableView.reloadData()
-        })
-        alertController.addTextField{(textField) in
-            textField.placeholder = "Name"
-        }
-        alertController.addAction(okAction)
-        present(alertController, animated: true, completion: nil)
+    //MARK: Actions    
+    @IBAction func backAction(_ sender: Any) {
+        self.dismiss(animated: true)
     }
     
     @IBAction func editAction(_ sender: Any) {
@@ -124,14 +106,9 @@ extension ListViewController {
 }
 
 extension ListViewController : AddItemViewControllerDelegate{
-    func addItem(_ controller: AddItemViewController, didFinishAddingItem name: String, desc: String) {
+    func addItem(_ controller: AddItemViewController, didFinishAddingItem item: Tache) {
         controller.dismiss(animated: true)
-        let item = Tache(context: self.dataManager.persistentContainer.viewContext)
-        item.nom = name
-        item.checked = false
-        let order = self.dataManager.cachedItems.count + 1
-        item.order = Int64(order)
-        item.descriptio = desc
+        
         self.dataManager.addItem(item: item)
         tableView.reloadData()
     }
