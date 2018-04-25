@@ -84,6 +84,7 @@ extension ListViewController:  UITableViewDataSource, UITableViewDelegate {
             
             if identifier == "addItem" {
                 destination.delegate = self
+                destination.context = self.dataManager.persistentContainer.viewContext
                 destination.state = ViewState.isAdd
             } else if identifier == "editItem" {
                 let cell = sender as! UITableViewCell
@@ -106,7 +107,6 @@ extension ListViewController {
 extension ListViewController : AddItemViewControllerDelegate{
     func addItem(_ controller: AddItemViewController, didFinishAddingItem item: Tache) {
         controller.dismiss(animated: true)
-        
         self.dataManager.addItem(item: item)
         tableView.reloadData()
     }

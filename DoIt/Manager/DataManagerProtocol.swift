@@ -19,5 +19,4 @@ protocol DataManagerProtocol : class {
     func removeItem(item: T)
     
     func filterItems(filter: String)
-    
 }

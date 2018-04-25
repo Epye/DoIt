@@ -25,6 +25,10 @@ class DataManager<T: NSManagedObject> : DataManagerProtocol{
     func loadData(){
         let entityName = String(describing: T.self)
         let request = NSFetchRequest<T>(entityName: entityName)
+        if entityName == "Tache" {
+            let sortDescriptorOrder = NSSortDescriptor(key: "order", ascending: true)
+            request.sortDescriptors = [sortDescriptorOrder]
+        }
         do {
             cachedItems = try persistentContainer.viewContext.fetch(request)
         } catch  {
@@ -47,8 +51,10 @@ class DataManager<T: NSManagedObject> : DataManagerProtocol{
     }
     
     func moveItem(sourceIndex: Int, destinationIndex: Int){
-        let sourceItem = cachedItems.remove(at: sourceIndex)
-        cachedItems.insert(sourceItem, at: destinationIndex)
+        let itemSource = cachedItems[sourceIndex] as! Tache
+        let itemDest = cachedItems[sourceIndex] as! Tache
+        itemSource.order = Int64(destinationIndex)
+        itemDest.order = Int64(sourceIndex)
         saveData()
     }
     
@@ -64,8 +70,9 @@ class DataManager<T: NSManagedObject> : DataManagerProtocol{
             loadData()
         } else {
             let sortDescriptor = NSSortDescriptor(key: "nom", ascending: true)
+            let sortDescriptorOrder = NSSortDescriptor(key: "order", ascending: true)
             let fetchedTaches: NSFetchRequest<T> = T.fetchRequest() as! NSFetchRequest<T>
-            fetchedTaches.sortDescriptors = [sortDescriptor]
+            fetchedTaches.sortDescriptors = [sortDescriptorOrder, sortDescriptor]
             fetchedTaches.predicate = NSPredicate(format: "nom contains[cd] %@", filter)
             do {
                 cachedItems = try persistentContainer.viewContext.fetch(fetchedTaches)

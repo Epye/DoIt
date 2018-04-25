@@ -6,8 +6,8 @@
 //  Copyright © 2018 iem. All rights reserved.
 //
 
-import Foundation
 import UIKit
+import CoreData
 
 enum ViewState: String{
     case isEdit = "edit"
@@ -20,6 +20,7 @@ class AddItemViewController : UITableViewController, UITextFieldDelegate{
     var state: ViewState!
     var tacheToEdit : Tache!
     var dataManager: DataManager = DataManager<Tache>()
+    var context: NSManagedObjectContext!
     
     @IBOutlet weak var textFieldName: UITextField!
     @IBOutlet weak var textFieldCategory: UITextField!
@@ -34,13 +35,13 @@ class AddItemViewController : UITableViewController, UITextFieldDelegate{
                 tacheToEdit.descriptio = textFieldDescription.text
                 delegate?.addItem(self, didFinishEditingItem: tacheToEdit)
             } else {
-                let item = Tache(context: self.dataManager.persistentContainer.viewContext)
+                let item = Tache(context: context)
                 item.nom = nomTache
                 item.checked = false
                 let order = self.dataManager.cachedItems.count + 1
                 item.order = Int64(order)
                 item.descriptio = textFieldDescription.text!
-                let tag = Tag(context: dataManager.persistentContainer.viewContext)
+                let tag = Tag(context: context)
                 tag.nom = "yellow"
                 tag.couleur = UIColor.yellow
                 item.tag = tag
