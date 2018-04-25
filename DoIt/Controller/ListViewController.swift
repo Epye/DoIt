@@ -94,8 +94,10 @@ extension ListViewController:  UITableViewDataSource, UITableViewDelegate {
                 destination.delegate = self
                 destination.state = ViewState.isAdd
             } else if identifier == "editItem" {
+                let cell = sender as! UITableViewCell
                 destination.delegate = self
                 destination.state = ViewState.isEdit
+                destination.tacheToEdit = dataManager.getItem(index:(tableView.indexPath(for: cell)?.row)!)
             }
         }
     }
@@ -118,7 +120,10 @@ extension ListViewController : AddItemViewControllerDelegate{
     
     
     func addItem(_ controller: AddItemViewController, didFinishEditingItem tache: Tache) {
-        
+        controller.dismiss(animated: true)
+        let index = IndexPath(item : dataManager.cachedItems.index(where:{ $0 === tache })!, section : 0)
+        tableView.reloadRows(at: [index] , with: UITableViewRowAnimation.none)
+        tableView.reloadData()
     }
     
     

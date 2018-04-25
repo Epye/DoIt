@@ -74,6 +74,11 @@ class AddItemViewController : UITableViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         picker.delegate = self
+        if state == .isEdit {
+            self.navigationItem.title = "Edit Item"
+            self.textFieldName.text = tacheToEdit.nom
+        }
+
     }
 }
 
